@@ -4,8 +4,8 @@ class Screen:
 
     def __init__(self):
         self.stdscr = curses.initscr()
+        curses.raw()
         curses.noecho()
-        curses.cbreak()
         self.stdscr.keypad(True)
         curses.curs_set(1)
 
@@ -13,7 +13,7 @@ class Screen:
         self.release()
 
     def release(self):
-        curses.nocbreak()
+        curses.noraw()
         self.stdscr.keypad(False)
         curses.echo()
         curses.endwin()
