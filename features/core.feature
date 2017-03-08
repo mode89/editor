@@ -13,3 +13,9 @@ Feature: Core functionality
         Given an editor
         When pressed '\x03'
         Then editor is exiting
+
+    Scenario: Switching to command mode
+        Given an editor
+        When pressed ':'
+        And refresh editor
+        Then editor is in command mode
