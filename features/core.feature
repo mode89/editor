@@ -2,8 +2,8 @@ Feature: Core functionality
 
     Scenario: Open file
         Given an editor
-        When open lipsum.txt
-        Then see file content
+        When open file "hello.txt"
+        Then content of screen is "Hello, World!\n"
 
     Scenario: Start editor in normal mode
         Given an editor

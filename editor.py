@@ -1,4 +1,5 @@
 from input_buffer import *
+from screen import *
 
 class Editor:
 
@@ -19,6 +20,7 @@ class Editor:
     def __init__(self):
         self.mode = Editor.NormalMode()
         self.input_buffer = InputBuffer()
+        self.screen = Screen()
         self.exiting = False
 
     def refresh(self):
@@ -30,4 +32,4 @@ class Editor:
     def open(self, file_name):
         with open(file_name, "r") as f:
             content = f.read()
-            print(content)
+            self.screen.write(content)

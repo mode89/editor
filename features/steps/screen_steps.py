@@ -10,4 +10,5 @@ def write_to_screen(context, text):
 
 @then("content of screen is \"{text}\"")
 def content_of_screen_is(context, text):
+    text = bytes(text, "utf-8").decode("unicode_escape")
     assert context.screen.content() == text

@@ -3,8 +3,9 @@ from editor import *
 @given("an editor")
 def instance_of_editor(context):
     context.editor = Editor()
+    context.screen = context.editor.screen
 
-@when("open {file_name}")
+@when("open file \"{file_name}\"")
 def open_file(context, file_name):
     context.editor.open(file_name)
 
