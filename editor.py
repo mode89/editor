@@ -5,6 +5,9 @@ class Editor:
     def run(self):
         try:
             self.screen = screen.Screen()
+            while True:
+                key = self.screen.stdscr.getkey()
+                if key == "\x03": break
         finally:
             self.screen.release()
 
