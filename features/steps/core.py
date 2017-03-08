@@ -16,9 +16,17 @@ def see_file_content(context):
 def mode_of_editor_is(context):
     assert context.editor.mode.__class__ == Editor.NormalMode
 
+@then("editor is in command mode")
+def editor_in_command_mode(context):
+    assert context.editor.mode.__class__ == Editor.CommandMode
+
 @when("pressed '\\x{code}'")
 def pressed_key_hex(context, code):
     context.editor.input_buffer.put(int(code, 16))
+
+@when("pressed '{char}'")
+def pressed_key_char(context, char):
+    context.editor.input_buffer.put(ord(char))
 
 @when("refresh editor")
 def refresh_editor(context):
