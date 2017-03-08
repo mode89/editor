@@ -8,3 +8,8 @@ Feature: Core functionality
     Scenario: Start editor in normal mode
         Given an editor
         Then editor is in normal mode
+
+    Scenario: Exiting
+        Given an editor
+        When pressed '\x03'
+        Then editor is exiting
