@@ -1,24 +1,11 @@
-import curses
-import curses.ascii
-
 class Editor:
 
-    def run(self):
-        try:
-            self.screen = curses.initscr()
-            curses.raw()
-            curses.noecho()
-            self.screen.keypad(True)
-            curses.curs_set(1)
+    class Mode: pass
 
-            while True:
-                key = self.screen.getch()
-                if key == curses.ascii.ETX: break
-        finally:
-            curses.noraw()
-            self.screen.keypad(False)
-            curses.echo()
-            curses.endwin()
+    class NormalMode(Mode): pass
+
+    def __init__(self):
+        self.mode = Editor.NormalMode()
 
     def open(self, file_name):
         with open(file_name, "r") as f:

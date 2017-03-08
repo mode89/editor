@@ -12,3 +12,7 @@ def open_file(context, file_name):
 @then("see file content")
 def see_file_content(context):
     pass
+
+@then("editor is in normal mode")
+def mode_of_editor_is(context):
+    assert context.editor.mode.__class__ == Editor.NormalMode
