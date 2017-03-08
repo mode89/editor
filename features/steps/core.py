@@ -1,6 +1,6 @@
 from editor import *
 
-@given("an instance of editor")
+@given("an editor")
 def instance_of_editor(context):
     context.editor = Editor()
 
