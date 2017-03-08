@@ -1,15 +1,24 @@
-import screen
+import curses
+import curses.ascii
 
 class Editor:
 
     def run(self):
         try:
-            self.screen = screen.Screen()
+            self.screen = curses.initscr()
+            curses.raw()
+            curses.noecho()
+            self.screen.keypad(True)
+            curses.curs_set(1)
+
             while True:
-                key = self.screen.stdscr.getkey()
-                if key == "\x03": break
+                key = self.screen.getch()
+                if key == curses.ascii.ETX: break
         finally:
-            self.screen.release()
+            curses.noraw()
+            self.screen.keypad(False)
+            curses.echo()
+            curses.endwin()
 
     def open(self, file_name):
         with open(file_name, "r") as f:
