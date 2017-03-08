@@ -1,5 +1,4 @@
 from editor import *
-import os
 
 @given("an instance of editor")
 def instance_of_editor(context):
