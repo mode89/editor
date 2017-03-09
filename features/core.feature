@@ -28,3 +28,4 @@ Feature: Core functionality
         When input "some command"
         And refresh editor
         Then command line is ":some command"
+        And command mode buffer is "some command"

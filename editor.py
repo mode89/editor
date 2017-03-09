@@ -18,13 +18,20 @@ class Editor:
     class CommandMode(Mode):
 
         def __init__(self, screen):
+            self.buffer = str()
             last_row = screen.rows - 1
             screen.write(":", (last_row, 0))
 
         def handle(self, editor, key):
+
+            # update command line buffer
+            self.buffer += chr(key)
+
+            # display buffer on the screen
             screen = editor.screen
             last_row = screen.rows - 1
-            screen.write(str(chr(key)))
+            screen.write(self.buffer, (last_row, 1))
+
             return self
 
     def __init__(self):

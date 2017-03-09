@@ -48,6 +48,10 @@ def refresh_editor(context):
 def editor_is_exiting(context):
     assert context.editor.exiting == True
 
+@then("command mode buffer is \"{text}\"")
+def step_impl(context, text):
+    assert context.editor.mode.buffer == text
+
 @then("command line is \"{text}\"")
 def step_impl(context, text):
 
