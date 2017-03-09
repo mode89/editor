@@ -24,6 +24,7 @@ def wrappred_main(stdscr):
             for col in range(lastcol):
                 stdscr.addch(row, col, screen[row,col])
             stdscr.insch(row, lastcol, screen[row,lastcol])
+        stdscr.move(screen.cursor.row, screen.cursor.col)
 
         editor.input_buffer.put(stdscr.getch())
         editor.refresh()
