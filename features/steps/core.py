@@ -4,7 +4,7 @@ from screen import *
 
 @given("an editor")
 def instance_of_editor(context):
-    context.screen = Screen(64, 64)
+    context.screen = Screen(25, 80)
     context.editor = Editor()
     context.editor.screen = context.screen
 
