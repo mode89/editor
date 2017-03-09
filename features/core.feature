@@ -27,8 +27,8 @@ Feature: Core functionality
         And editor is in command mode
         When input "some command"
         And refresh editor
-        Then command line is ":some command"
-        And command mode buffer is "some command"
+        Then command buffer is "some command"
+        And command line is ":some command"
 
     Scenario: Backspace input command
         Given an editor
@@ -36,5 +36,5 @@ Feature: Core functionality
         When input "some command"
         And press key KEY_BACKSPACE 5 times
         And refresh editor
-        Then command mode buffer is "some co"
+        Then command buffer is "some co"
         Then command line is ":some co"
