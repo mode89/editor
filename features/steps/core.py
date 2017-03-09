@@ -38,3 +38,7 @@ def refresh_editor(context):
 @then("editor is exiting")
 def editor_is_exiting(context):
     assert context.editor.exiting == True
+
+@then("see command mode prompt")
+def step_impl(context):
+    assert context.screen[context.screen.rows-1,0] == ord(':')

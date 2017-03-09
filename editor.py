@@ -5,17 +5,21 @@ class Editor:
 
     class Mode:
 
-        def handle(self, key):
+        def handle(self, editor, key):
             raise NotImplemented
 
     class NormalMode(Mode):
 
-        def handle(self, key):
+        def handle(self, editor, key):
             if key == ord(':'):
-                return Editor.CommandMode()
+                return Editor.CommandMode(editor.screen)
             return self
 
-    class CommandMode(Mode): pass
+    class CommandMode(Mode):
+
+        def __init__(self, screen):
+            last_row = screen.rows - 1
+            screen.write(":", (last_row, 0))
 
     def __init__(self):
         self.mode = Editor.NormalMode()
@@ -26,7 +30,7 @@ class Editor:
         key = self.input_buffer.get()
         if key == 3:
             self.exiting = True
-        self.mode = self.mode.handle(key)
+        self.mode = self.mode.handle(self, key)
 
     def open(self, file_name):
         with open(file_name, "r") as f:

@@ -20,3 +20,4 @@ Feature: Core functionality
         When pressed ':'
         And refresh editor
         Then editor is in command mode
+        Then see command mode prompt
