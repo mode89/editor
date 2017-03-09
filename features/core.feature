@@ -71,3 +71,8 @@ Feature: Core functionality
         When input "h" 2 times
         And refresh editor
         Then cursor position is (4, 1)
+
+    Scenario: Display big files
+        Given an editor
+        When open file "lipsum.txt"
+        Then refresh editor
