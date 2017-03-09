@@ -1,3 +1,5 @@
+KEY_BACKSPACE = 0x107
+
 class InputBuffer:
 
     def __init__(self):

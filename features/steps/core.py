@@ -1,4 +1,5 @@
 from editor import *
+import input_buffer
 from screen import *
 
 @given("an editor")
@@ -26,6 +27,13 @@ def mode_of_editor_is(context):
 @then("editor is in command mode")
 def editor_in_command_mode(context):
     assert context.editor.mode.__class__ == Editor.CommandMode
+
+@when("press key {name} {n:d} times")
+def step_impl(context, name, n):
+    assert name in input_buffer.__dict__
+    key = input_buffer.__dict__[name]
+    for i in range(n):
+        context.editor.input_buffer.put(key)
 
 @when("input \"{text}\"")
 def step_impl(context, text):

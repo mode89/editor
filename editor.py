@@ -19,18 +19,30 @@ class Editor:
 
         def __init__(self, screen):
             self.buffer = str()
+            self.cursor = 0
             last_row = screen.rows - 1
             screen.write(":", (last_row, 0))
 
         def handle(self, editor, key):
 
-            # update command line buffer
-            self.buffer += chr(key)
-
-            # display buffer on the screen
             screen = editor.screen
             last_row = screen.rows - 1
-            screen.write(self.buffer, (last_row, 1))
+            begin = (last_row, 1)
+
+            # update command line buffer
+            if key == KEY_BACKSPACE:
+                first = self.buffer[0:self.cursor-1]
+                second = self.buffer[self.cursor:-1]
+                self.buffer = first + second
+                if self.cursor > 0: self.cursor -= 1
+            else:
+                self.buffer += chr(key)
+                self.cursor += 1
+
+            # clear command line and write command buffer
+            clear = " " * (screen.cols - 1)
+            screen.write(clear, begin)
+            screen.write(self.buffer, begin)
 
             return self
 
