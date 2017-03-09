@@ -27,16 +27,9 @@ def mode_of_editor_is(context):
 def editor_in_command_mode(context):
     assert context.editor.mode.__class__ == Editor.CommandMode
 
-@when("pressed '\\x{code}'")
-def pressed_key_hex(context, code):
-    context.editor.input_buffer.put(int(code, 16))
-
-@when("pressed '{char}'")
-def pressed_key_char(context, char):
-    context.editor.input_buffer.put(ord(char))
-
 @when("input \"{text}\"")
 def step_impl(context, text):
+    text = bytes(text, "utf-8").decode("unicode_escape")
     for char in text:
         context.editor.input_buffer.put(ord(char))
 

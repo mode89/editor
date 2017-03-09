@@ -11,13 +11,13 @@ Feature: Core functionality
 
     Scenario: Exiting
         Given an editor
-        When pressed '\x03'
+        When input "\x03"
         And refresh editor
         Then editor is exiting
 
     Scenario: Switching to command mode
         Given an editor
-        When pressed ':'
+        When input ":"
         And refresh editor
         Then editor is in command mode
         Then command line is ":"
