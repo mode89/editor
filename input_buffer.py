@@ -9,3 +9,6 @@ class InputBuffer:
 
     def get(self):
         return self.buffer.pop(0)
+
+    def empty(self):
+        return len(self.buffer) == 0
