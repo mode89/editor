@@ -20,7 +20,7 @@ Feature: Core functionality
         When pressed ':'
         And refresh editor
         Then editor is in command mode
-        Then see command mode prompt
+        Then command line is ":"
 
     Scenario: Input command
         Given an editor

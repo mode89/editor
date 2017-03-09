@@ -48,6 +48,19 @@ def refresh_editor(context):
 def editor_is_exiting(context):
     assert context.editor.exiting == True
 
-@then("see command mode prompt")
-def step_impl(context):
-    assert context.screen[context.screen.rows-1,0] == ord(':')
+@then("command line is \"{text}\"")
+def step_impl(context, text):
+
+    screen = context.screen
+    row = screen.rows - 1
+
+    # skip trailing spaces
+    lastcol = screen.cols - 1
+    while screen[row,lastcol] == ord(' '):
+        lastcol -= 1
+
+    cmdline = str()
+    for col in range(lastcol + 1):
+        cmdline += chr(screen[row,col])
+
+    assert cmdline == text
