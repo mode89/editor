@@ -7,6 +7,10 @@ def instance_of_editor(context):
     context.editor = Editor()
     context.editor.screen = context.screen
 
+@given("editor is in command mode")
+def step_impl(context):
+    context.editor.mode = Editor.CommandMode(context.editor.screen)
+
 @when("open file \"{file_name}\"")
 def open_file(context, file_name):
     context.editor.open(file_name)
