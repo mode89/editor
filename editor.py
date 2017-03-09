@@ -21,6 +21,12 @@ class Editor:
             last_row = screen.rows - 1
             screen.write(":", (last_row, 0))
 
+        def handle(self, editor, key):
+            screen = editor.screen
+            last_row = screen.rows - 1
+            screen.write(str(chr(key)))
+            return self
+
     def __init__(self):
         self.mode = Editor.NormalMode()
         self.input_buffer = InputBuffer()
