@@ -33,6 +33,13 @@ def step_impl(context, text):
     for char in text:
         context.editor.input_buffer.put(ord(char))
 
+@when("input \"{text}\" {n:d} times")
+def step_impl(context, text, n):
+    text = bytes(text, "utf-8").decode("unicode_escape")
+    for i in range(n):
+        for char in text:
+            context.editor.input_buffer.put(ord(char))
+
 @when("refresh editor")
 def refresh_editor(context):
     context.editor.refresh()
