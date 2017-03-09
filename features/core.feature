@@ -76,3 +76,8 @@ Feature: Core functionality
         Given an editor
         When open file "lipsum.txt"
         Then refresh editor
+
+    Scenario: Resize screen
+        Given an editor
+        When screen change size
+        Then refresh editor
