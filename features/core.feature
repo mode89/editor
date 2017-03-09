@@ -34,7 +34,14 @@ Feature: Core functionality
         Given an editor
         And editor is in command mode
         When input "some command"
-        And press key KEY_BACKSPACE 5 times
+        And press 5 times key KEY_BACKSPACE
         And refresh editor
         Then command buffer is "some co"
         Then command line is ":some co"
+
+    Scenario: Execute command
+        Given an editor
+        And editor is in command mode
+        When input "raise RuntimeError(\"Hello, World!\")"
+        And press key KEY_ENTER
+        Then refreshing raises RuntimeError("Hello, World!")

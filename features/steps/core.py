@@ -28,9 +28,13 @@ def mode_of_editor_is(context):
 def editor_in_command_mode(context):
     assert context.editor.mode.__class__ == Editor.CommandMode
 
-@when("press key {name} {n:d} times")
-def step_impl(context, name, n):
-    assert name in input_buffer.__dict__
+@when("press key {name}")
+def step_impl(context, name):
+    key = input_buffer.__dict__[name]
+    context.editor.input_buffer.put(key)
+
+@when("press {n:d} times key {name}")
+def step_impl(context, n, name):
     key = input_buffer.__dict__[name]
     for i in range(n):
         context.editor.input_buffer.put(key)
@@ -76,3 +80,13 @@ def step_impl(context, text):
         cmdline += chr(screen[row,col])
 
     assert cmdline == text
+
+@then("refreshing raises {type_name}(\"{text}\")")
+def step_impl(context, type_name, text):
+    raised = False
+    try:
+        context.editor.refresh()
+    except eval(type_name) as e:
+        raised = True
+        assert str(e) == text
+    assert raised

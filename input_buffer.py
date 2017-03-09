@@ -1,4 +1,5 @@
 KEY_BACKSPACE = 0x107
+KEY_ENTER = 0x0a
 
 class InputBuffer:
 

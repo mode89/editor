@@ -38,6 +38,9 @@ class Editor:
                 second = self.buffer[self.cursor:-1]
                 self.buffer = first + second
                 if self.cursor > 0: self.cursor -= 1
+            elif key == KEY_ENTER:
+                self.command = self.buffer
+                exec(self.command)
 
             # clear command line and write command buffer
             clear = " " * (screen.cols - 1)
