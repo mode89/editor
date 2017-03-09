@@ -21,3 +21,10 @@ Feature: Core functionality
         And refresh editor
         Then editor is in command mode
         Then see command mode prompt
+
+    Scenario: Input command
+        Given an editor
+        And editor is in command mode
+        When input "some command"
+        And refresh editor
+        Then command line is ":some command"
