@@ -30,14 +30,14 @@ class Editor:
             begin = (last_row, 1)
 
             # update command line buffer
-            if key == KEY_BACKSPACE:
+            if key >= 32 and key <= 126:
+                self.buffer += chr(key)
+                self.cursor += 1
+            elif key == KEY_BACKSPACE:
                 first = self.buffer[0:self.cursor-1]
                 second = self.buffer[self.cursor:-1]
                 self.buffer = first + second
                 if self.cursor > 0: self.cursor -= 1
-            else:
-                self.buffer += chr(key)
-                self.cursor += 1
 
             # clear command line and write command buffer
             clear = " " * (screen.cols - 1)
