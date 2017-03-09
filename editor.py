@@ -20,7 +20,6 @@ class Editor:
     def __init__(self):
         self.mode = Editor.NormalMode()
         self.input_buffer = InputBuffer()
-        self.screen = Screen()
         self.exiting = False
 
     def refresh(self):

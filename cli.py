@@ -1,18 +1,31 @@
 import curses
 from editor import *
+from screen import *
 
-def wrappred_main(screen):
+def wrappred_main(stdscr):
     curses.use_default_colors()
     curses.noecho()
     curses.cbreak()
     curses.raw()
-    screen.keypad(True)
+    stdscr.keypad(True)
+    stdscr.clearok(False)
+    stdscr.immedok(False)
 
     editor = Editor()
+    rows, cols = stdscr.getmaxyx()
+    screen = Screen(rows, cols)
+    editor.screen = screen
+
     while not editor.exiting:
-        screen.clear()
-        screen.addstr(editor.screen.content())
-        editor.input_buffer.put(screen.getch())
+
+        for row in range(screen.rows):
+            # curses throws error when addch() writes to the last column
+            lastcol = screen.cols - 1
+            for col in range(lastcol):
+                stdscr.addch(row, col, screen[row,col])
+            stdscr.insch(row, lastcol, screen[row,lastcol])
+
+        editor.input_buffer.put(stdscr.getch())
         editor.refresh()
 
 def main():

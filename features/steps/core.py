@@ -1,9 +1,11 @@
 from editor import *
+from screen import *
 
 @given("an editor")
 def instance_of_editor(context):
+    context.screen = Screen(64, 64)
     context.editor = Editor()
-    context.screen = context.editor.screen
+    context.editor.screen = context.screen
 
 @when("open file \"{file_name}\"")
 def open_file(context, file_name):
