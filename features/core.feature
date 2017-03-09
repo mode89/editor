@@ -45,3 +45,11 @@ Feature: Core functionality
         When input "raise RuntimeError(\"Hello, World!\")"
         And press key KEY_ENTER
         Then refreshing raises RuntimeError("Hello, World!")
+
+    Scenario: Open file from command mode
+        Given an editor
+        And editor is in command mode
+        When input "editor.open(\"hello.txt\")"
+        And press key KEY_ENTER
+        And refresh editor
+        Then content of screen is "Hello, World!"

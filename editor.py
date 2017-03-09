@@ -39,8 +39,8 @@ class Editor:
                 self.buffer = first + second
                 if self.cursor > 0: self.cursor -= 1
             elif key == KEY_ENTER:
-                self.command = self.buffer
-                exec(self.command)
+                exec(self.buffer)
+                return Editor.NormalMode()
 
             # clear command line and write command buffer
             clear = " " * (screen.cols - 1)
@@ -64,4 +64,4 @@ class Editor:
     def open(self, file_name):
         with open(file_name, "r") as f:
             content = f.read()
-            self.screen.write(content)
+            self.screen.write(content, (0, 0))
