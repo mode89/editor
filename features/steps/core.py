@@ -35,6 +35,11 @@ def pressed_key_hex(context, code):
 def pressed_key_char(context, char):
     context.editor.input_buffer.put(ord(char))
 
+@when("input \"{text}\"")
+def step_impl(context, text):
+    for char in text:
+        context.editor.input_buffer.put(ord(char))
+
 @when("refresh editor")
 def refresh_editor(context):
     context.editor.refresh()
