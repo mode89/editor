@@ -27,10 +27,11 @@ class Editor:
         self.exiting = False
 
     def refresh(self):
-        key = self.input_buffer.get()
-        if key == 3:
-            self.exiting = True
-        self.mode = self.mode.handle(self, key)
+        while not self.input_buffer.empty():
+            key = self.input_buffer.get()
+            if key == 3:
+                self.exiting = True
+            self.mode = self.mode.handle(self, key)
 
     def open(self, file_name):
         with open(file_name, "r") as f:
