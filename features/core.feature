@@ -11,6 +11,12 @@ Feature: Core functionality
         Given an editor
         Then editor is in normal mode
 
+    Scenario: Execute some code
+        Given an editor
+        Then editor is running
+        When execute "editor.exiting = True"
+        Then editor is exiting
+
     Scenario: Mapping
         Given an editor
         When map 'q' to "editor.exiting = True"

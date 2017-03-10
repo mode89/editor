@@ -60,6 +60,10 @@ def step_impl(context, text, n):
 def refresh_editor(context):
     context.editor.refresh()
 
+@then("editor is running")
+def step_impl(context):
+    assert context.editor.exiting == False
+
 @then("editor is exiting")
 def editor_is_exiting(context):
     assert context.editor.exiting == True
@@ -107,3 +111,7 @@ def step_impl(context, text):
 @then("current buffer is \"{text}\"")
 def step_impl(context, text):
     assert context.editor.view.buffer is context.editor.buffers[text]
+
+@when("execute \"{command}\"")
+def step_impl(context, command):
+    context.editor.execute(command)

@@ -22,6 +22,10 @@ class Editor:
         self.mode = mode
         self.mode.enter(self)
 
+    def execute(self, command):
+        scope = { "editor": self }
+        exec(command, scope)
+
     def refresh(self):
         while not self.input_buffer.empty():
             key = self.input_buffer.get()
