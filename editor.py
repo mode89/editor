@@ -72,3 +72,4 @@ class Editor:
         new_buffer = Buffer(file_name)
         self.buffers[file_name] = new_buffer
         self.view.buffer = new_buffer
+        self.view.flush(self.screen)
