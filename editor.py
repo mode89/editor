@@ -11,6 +11,8 @@ class Editor:
     class NormalMode(Mode):
 
         def handle(self, editor, key):
+            if key == ord('j'):
+                editor.screen.cursor.row += 1
             if key == ord(':'):
                 return Editor.CommandMode(editor.screen)
             return self
