@@ -102,4 +102,4 @@ def step_impl(context, text):
 
 @then("current buffer is \"{text}\"")
 def step_impl(context, text):
-    assert context.editor.current_buffer is context.editor.buffers[text]
+    assert context.editor.view.buffer is context.editor.buffers[text]

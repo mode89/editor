@@ -1,6 +1,7 @@
 from buffer import *
 from input_buffer import *
 from screen import *
+from view import *
 
 class Editor:
 
@@ -54,6 +55,7 @@ class Editor:
             return self
 
     def __init__(self):
+        self.view = View()
         self.buffers = dict()
         self.mode = Editor.NormalMode()
         self.input_buffer = InputBuffer()
@@ -69,4 +71,4 @@ class Editor:
     def open(self, file_name):
         new_buffer = Buffer(file_name)
         self.buffers[file_name] = new_buffer
-        self.current_buffer = new_buffer
+        self.view.buffer = new_buffer
