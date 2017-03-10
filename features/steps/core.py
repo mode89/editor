@@ -1,16 +1,18 @@
-from editor import *
-import input_buffer
 from screen import *
+import command_mode
+import editor
+import input_buffer
+import normal_mode
 
 @given("an editor")
 def instance_of_editor(context):
     context.screen = Screen(25, 80)
-    context.editor = Editor()
+    context.editor = editor.Editor()
     context.editor.screen = context.screen
 
 @given("editor is in command mode")
 def step_impl(context):
-    context.editor.mode = Editor.CommandMode(context.editor.screen)
+    context.editor.set_mode(context.editor.modes[command_mode.CommandMode])
 
 @when("open file \"{file_name}\"")
 def open_file(context, file_name):
@@ -22,11 +24,13 @@ def see_file_content(context):
 
 @then("editor is in normal mode")
 def mode_of_editor_is(context):
-    assert context.editor.mode.__class__ == Editor.NormalMode
+    assert context.editor.mode is \
+        context.editor.modes[normal_mode.NormalMode]
 
 @then("editor is in command mode")
 def editor_in_command_mode(context):
-    assert context.editor.mode.__class__ == Editor.CommandMode
+    assert context.editor.mode is \
+        context.editor.modes[command_mode.CommandMode]
 
 @when("press key {name}")
 def step_impl(context, name):
