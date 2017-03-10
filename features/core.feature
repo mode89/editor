@@ -81,3 +81,9 @@ Feature: Core functionality
         Given an editor
         When screen change size
         Then refresh editor
+
+    Scenario: Print standard output
+        Given an editor
+        And editor is in command mode
+        When execute command "print(\"Hello, World!\")"
+        Then observe "Hello, World!"
