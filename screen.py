@@ -15,13 +15,8 @@ class Screen:
             self.cursor.col = coord[1]
 
         for char in text:
-
-            if char == '\n' or self.cursor.col == self.cols:
-                self.cursor.row += 1
-                self.cursor.col = 0
-            else:
-                self.buffer[self.cursor.row][self.cursor.col] = ord(char)
-                self.cursor.col += 1
+            self.buffer[self.cursor.row][self.cursor.col] = ord(char)
+            self.cursor.col += 1
 
     def __getitem__(self, coord):
         return self.buffer[coord[0]][coord[1]]
