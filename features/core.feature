@@ -94,7 +94,8 @@ Feature: Core functionality
     Scenario: Display long file
         Given an editor
         When open file "lipsum.txt"
-        Then refresh editor
+        And refresh editor
+        Then screen is identical to file "long_file.screen"
 
     Scenario: Display wide file
         Given screen of size (25, 74)
