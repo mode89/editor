@@ -65,3 +65,5 @@ class Editor:
         with open(file_name, "r") as f:
             content = f.read()
             self.screen.write(content, (0, 0))
+            self.screen.cursor.row = 0
+            self.screen.cursor.col = 0
