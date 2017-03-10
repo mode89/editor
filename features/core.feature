@@ -96,6 +96,13 @@ Feature: Core functionality
         When open file "lipsum.txt"
         Then refresh editor
 
+    Scenario: Display wide file
+        Given screen of size (25, 74)
+        And an editor
+        When open file "lipsum.txt"
+        And refresh editor
+        Then screen is identical to file "wide_file.screen"
+
     Scenario: Resize screen
         Given an editor
         When screen change size

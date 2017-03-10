@@ -11,13 +11,25 @@ class View:
 
     def flush(self, screen):
 
-        start = self.start
-        stop = min(start + screen.rows, len(self.buffer.lines))
-        lines = itertools.islice(self.buffer.lines, start, stop)
+        lines = itertools.islice(
+            self.buffer.lines,
+            self.start,
+            len(self.buffer.lines))
 
         # write lines starting from the begining of the screen
-        screen.cursor = Cursor(0, 0)
+        row = 0
         for line in lines:
-            screen.write(line)
+
+            line_len = len(line) - 1 # don't count line break
+            line_rows = int(line_len / screen.cols) + 1
+
+            for i in range(line_rows):
+                start = i * screen.cols
+                stop = min(start + screen.cols, line_len)
+                screen.write(line[start:stop], (row, 0))
+                row += 1
+                if row >= screen.rows: break # reach bottom of screen
+
+            if row >= screen.rows: break # reach bottom of screen
 
         screen.cursor = deepcopy(self.cursor)

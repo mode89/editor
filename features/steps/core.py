@@ -4,9 +4,14 @@ import editor
 import input_buffer
 import normal_mode
 
+@given("screen of size ({rows:d}, {cols:d})")
+def step_impl(context, rows, cols):
+    context.screen = Screen(rows, cols)
+
 @given("an editor")
 def instance_of_editor(context):
-    context.screen = Screen(25, 80)
+    if not hasattr(context, "screen"):
+        context.screen = Screen(25, 80)
     context.editor = editor.Editor()
     context.editor.screen = context.screen
 
