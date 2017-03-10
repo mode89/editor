@@ -3,12 +3,7 @@ from screen import *
 
 class Editor:
 
-    class Mode:
-
-        def handle(self, editor, key):
-            raise NotImplemented
-
-    class NormalMode(Mode):
+    class NormalMode:
 
         def handle(self, editor, key):
             if key == ord('j'):
@@ -23,7 +18,7 @@ class Editor:
                 return Editor.CommandMode(editor.screen)
             return self
 
-    class CommandMode(Mode):
+    class CommandMode:
 
         def __init__(self, screen):
             self.buffer = str()
