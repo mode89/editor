@@ -104,6 +104,38 @@ Feature: Core functionality
         And refresh editor
         Then screen is identical to file "wide_file.screen"
 
+    Scenario: Navigate in wide file
+        Given screen of size (43, 25)
+        Given an editor
+        When open file "lipsum.txt"
+        And refresh editor
+        Then view cursor position is (0, 0)
+        And screen cursor position is (0, 0)
+        When input "l" 28 times
+        And refresh editor
+        Then view cursor position is (0, 28)
+        And screen cursor position is (1, 3)
+        When input "l" 50 times
+        And refresh editor
+        Then view cursor position is (0, 67)
+        And screen cursor position is (2, 17)
+        When input "j"
+        And refresh editor
+        Then view cursor position is (1, 67)
+        And screen cursor position is (5, 17)
+        When input "l" 10 times
+        And refresh editor
+        Then view cursor position is (1, 69)
+        And screen cursor position is (5, 19)
+        When input "h" 80 times
+        And refresh editor
+        Then view cursor position is (1, 0)
+        And screen cursor position is (3, 0)
+        When input "k" 10 times
+        And refresh editor
+        Then view cursor position is (0, 0)
+        And screen cursor position is (0, 0)
+
     Scenario: Resize screen
         Given an editor
         When screen change size
