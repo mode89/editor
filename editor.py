@@ -1,3 +1,4 @@
+from buffer import *
 from input_buffer import *
 from screen import *
 
@@ -53,6 +54,7 @@ class Editor:
             return self
 
     def __init__(self):
+        self.buffers = dict()
         self.mode = Editor.NormalMode()
         self.input_buffer = InputBuffer()
         self.exiting = False
@@ -67,6 +69,7 @@ class Editor:
     def open(self, file_name):
         with open(file_name, "r") as f:
             content = f.read()
+            self.buffers[file_name] = Buffer(file_name)
             self.screen.write(content, (0, 0))
             self.screen.cursor.row = 0
             self.screen.cursor.col = 0
