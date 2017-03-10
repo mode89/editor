@@ -23,7 +23,7 @@ Feature: Core functionality
         And input "q"
         And refresh editor
         Then editor is exiting
-        When map 'q' to "editor.mode = Editor.CommandMode()"
+        When map 'q' to "editor.enter_command_mode()"
         And input "q"
         And refresh editor
         Then editor is in command mode

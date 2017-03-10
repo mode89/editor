@@ -112,6 +112,10 @@ def step_impl(context, text):
 def step_impl(context, text):
     assert context.editor.view.buffer is context.editor.buffers[text]
 
+@when("map '{text}' to \"{code}\"")
+def step_impl(context, text, code):
+    context.editor.modes[normal_mode.NormalMode].mapping[text] = code
+
 @when("execute \"{command}\"")
 def step_impl(context, command):
     context.editor.execute(command)
