@@ -95,3 +95,7 @@ def step_impl(context, type_name, text):
 def step_impl(context, row, col):
     assert context.screen.cursor.row == row
     assert context.screen.cursor.col == col
+
+@then("editor has buffer \"{text}\"")
+def step_impl(context, text):
+    assert text in context.editor.buffers

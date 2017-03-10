@@ -4,6 +4,7 @@ Feature: Core functionality
         Given an editor
         When open file "hello.txt"
         Then content of screen is "Hello, World!\n"
+        And editor has buffer "hello.txt"
 
     Scenario: Start editor in normal mode
         Given an editor
