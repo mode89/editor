@@ -67,9 +67,6 @@ class Editor:
             self.mode = self.mode.handle(self, key)
 
     def open(self, file_name):
-        with open(file_name, "r") as f:
-            content = f.read()
-            self.buffers[file_name] = Buffer(file_name)
-            self.screen.write(content, (0, 0))
-            self.screen.cursor.row = 0
-            self.screen.cursor.col = 0
+        new_buffer = Buffer(file_name)
+        self.buffers[file_name] = new_buffer
+        self.current_buffer = new_buffer
