@@ -1,8 +1,9 @@
+from argparse import ArgumentParser
 import curses
 from editor import *
 from screen import *
 
-def wrappred_main(stdscr):
+def wrappred_main(stdscr, args):
     curses.use_default_colors()
     curses.noecho()
     curses.cbreak()
@@ -15,6 +16,9 @@ def wrappred_main(stdscr):
     rows, cols = stdscr.getmaxyx()
     screen = Screen(rows, cols)
     editor.screen = screen
+
+    if args.file is not None:
+        editor.open(args.file)
 
     while not editor.exiting:
 
@@ -29,8 +33,12 @@ def wrappred_main(stdscr):
         editor.input_buffer.put(stdscr.getch())
         editor.refresh()
 
-def main():
-    curses.wrapper(wrappred_main)
+def main(args):
+    curses.wrapper(wrappred_main, args)
 
 if __name__ == "__main__":
-    main()
+    parser = ArgumentParser()
+    parser.add_argument("file", nargs='?')
+    args = parser.parse_args()
+
+    main(args)
