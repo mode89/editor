@@ -15,6 +15,8 @@ class Editor:
                 editor.screen.cursor.row += 1
             if key == ord('k'):
                 editor.screen.cursor.row -= 1
+            if key == ord('l'):
+                editor.screen.cursor.col += 1
             if key == ord(':'):
                 return Editor.CommandMode(editor.screen)
             return self
