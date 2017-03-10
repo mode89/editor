@@ -8,15 +8,18 @@ def create_screen(context):
 def write_to_screen(context, text):
     context.screen.write(text)
 
-@then("content of screen is \"{text}\"")
-def content_of_screen_is(context, text):
-    text = bytes(text, "utf-8").decode("unicode_escape")
-    row = 0
-    col = 0
-    for char in text:
-        if char == '\n':
-            row += 1
-            col = 0
-        else:
-            assert char == chr(context.screen[row, col])
-            col += 1
+@then("write screen to file \"{filename}\"")
+def screen_dump(context, filename):
+    with open(filename, "wb") as f:
+        for row in context.screen.buffer:
+            for char in row:
+                f.write(chr(char).encode())
+            f.write('\n'.encode())
+
+@then("screen is identical to file \"{filename}\"")
+def screen_compare(context, filename):
+    with open(filename, "rb") as f:
+        for row in context.screen.buffer:
+            for char in row:
+                assert f.read(1) == chr(char).encode()
+            assert f.read(1) == '\n'.encode()

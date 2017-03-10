@@ -5,7 +5,7 @@ Feature: Core functionality
         When open file "hello.txt"
         Then editor has buffer "hello.txt"
         And current buffer is "hello.txt"
-        And content of screen is "Hello, World!\n"
+        And screen is identical to file "hello.screen"
 
     Scenario: Start editor in normal mode
         Given an editor
@@ -71,7 +71,7 @@ Feature: Core functionality
         When input "editor.open(\"hello.txt\")"
         And press key KEY_ENTER
         And refresh editor
-        Then content of screen is "Hello, World!"
+        Then screen is identical to file "open_hello.screen"
 
     Scenario: Navigate in normal mode
         Given an editor
