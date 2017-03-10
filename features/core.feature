@@ -11,6 +11,17 @@ Feature: Core functionality
         Given an editor
         Then editor is in normal mode
 
+    Scenario: Mapping
+        Given an editor
+        When map 'q' to "editor.exiting = True"
+        And input "q"
+        And refresh editor
+        Then editor is exiting
+        When map 'q' to "editor.mode = Editor.CommandMode()"
+        And input "q"
+        And refresh editor
+        Then editor is in command mode
+
     Scenario: Exiting
         Given an editor
         When input "\x03"
