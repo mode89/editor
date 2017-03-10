@@ -99,3 +99,7 @@ def step_impl(context, row, col):
 @then("editor has buffer \"{text}\"")
 def step_impl(context, text):
     assert text in context.editor.buffers
+
+@then("current buffer is \"{text}\"")
+def step_impl(context, text):
+    assert context.editor.current_buffer is context.editor.buffers[text]

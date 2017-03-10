@@ -3,8 +3,9 @@ Feature: Core functionality
     Scenario: Open file
         Given an editor
         When open file "hello.txt"
-        Then content of screen is "Hello, World!\n"
-        And editor has buffer "hello.txt"
+        Then editor has buffer "hello.txt"
+        And current buffer is "hello.txt"
+        And content of screen is "Hello, World!\n"
 
     Scenario: Start editor in normal mode
         Given an editor
