@@ -1,16 +1,12 @@
+from cursor import Cursor
+
 class Screen:
-
-    class Cursor:
-
-        def __init__(self):
-            self.row = 0
-            self.col = 0
 
     def __init__(self, rows, cols):
         self.rows = rows
         self.cols = cols
         self.buffer = [[ord(' ') for x in range(cols)] for y in range(rows)]
-        self.cursor = Screen.Cursor()
+        self.cursor = Cursor(0, 0)
 
     def write(self, text, coord=None):
 
