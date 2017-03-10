@@ -90,3 +90,8 @@ def step_impl(context, type_name, text):
         raised = True
         assert str(e) == text
     assert raised
+
+@then("cursor position is ({row:d}, {col:d})")
+def step_impl(context, row, col):
+    assert context.screen.cursor.row == row
+    assert context.screen.cursor.col == col
