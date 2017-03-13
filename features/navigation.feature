@@ -40,3 +40,12 @@ Feature: Navigation
         And refresh editor
         Then view cursor position is (0, 10)
         And screen cursor position is (0, 10)
+
+    Scenario: Move cursor right in a long line
+        Given screen of size (43, 25)
+        And an editor
+        When open file "lipsum.txt"
+        And input "l" 28 times
+        And refresh editor
+        Then view cursor position is (0, 28)
+        And screen cursor position is (1, 3)
