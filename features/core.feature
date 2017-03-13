@@ -77,19 +77,19 @@ Feature: Core functionality
         Given an editor
         When open file "short_lipsum.txt"
         And refresh editor
-        Then cursor position is (0, 0)
+        Then screen cursor position is (0, 0)
         When input "j" 5 times
         And refresh editor
-        Then cursor position is (5, 0)
+        Then screen cursor position is (5, 0)
         When input "k" 1 times
         And refresh editor
-        Then cursor position is (4, 0)
+        Then screen cursor position is (4, 0)
         When input "l" 3 times
         And refresh editor
-        Then cursor position is (4, 3)
+        Then screen cursor position is (4, 3)
         When input "h" 2 times
         And refresh editor
-        Then cursor position is (4, 1)
+        Then screen cursor position is (4, 1)
 
     Scenario: Display long file
         Given an editor

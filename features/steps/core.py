@@ -104,10 +104,15 @@ def step_impl(context, type_name, text):
         assert str(e) == text
     assert raised
 
-@then("cursor position is ({row:d}, {col:d})")
+@then("screen cursor position is ({row:d}, {col:d})")
 def step_impl(context, row, col):
     assert context.screen.cursor.row == row
     assert context.screen.cursor.col == col
+
+@then("view cursor position is ({row:d}, {col:d})")
+def step_impl(context, row, col):
+    assert context.editor.view.cursor.row == row
+    assert context.editor.view.cursor.col == col
 
 @then("editor has buffer \"{text}\"")
 def step_impl(context, text):
