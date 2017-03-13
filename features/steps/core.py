@@ -114,6 +114,11 @@ def step_impl(context, row, col):
     assert context.editor.view.cursor.row == row
     assert context.editor.view.cursor.col == col
 
+@when("set view cursor ({line:d}, {col:d})")
+def step_impl(context, line, col):
+    context.editor.view.cursor.line = line
+    context.editor.view.cursor.col = col
+
 @then("editor has buffer \"{text}\"")
 def step_impl(context, text):
     assert text in context.editor.buffers
