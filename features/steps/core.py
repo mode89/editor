@@ -109,9 +109,9 @@ def step_impl(context, row, col):
     assert context.screen.cursor.row == row
     assert context.screen.cursor.col == col
 
-@then("view cursor position is ({row:d}, {col:d})")
-def step_impl(context, row, col):
-    assert context.editor.view.cursor.row == row
+@then("view cursor position is ({line:d}, {col:d})")
+def step_impl(context, line, col):
+    assert context.editor.view.cursor.line == line
     assert context.editor.view.cursor.col == col
 
 @when("set view cursor ({line:d}, {col:d})")
