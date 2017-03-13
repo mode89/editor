@@ -49,3 +49,12 @@ Feature: Navigation
         And refresh editor
         Then view cursor position is (0, 28)
         And screen cursor position is (1, 3)
+
+    Scenario: Stop at the end of line when move right
+        Given screen of size (43, 25)
+        And an editor
+        When open file "lipsum.txt"
+        And input "l" 80 times
+        And refresh editor
+        Then view cursor position is (0, 67)
+        And screen cursor position is (2, 17)
