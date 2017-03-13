@@ -58,3 +58,13 @@ Feature: Navigation
         And refresh editor
         Then view cursor position is (0, 67)
         And screen cursor position is (2, 17)
+
+    Scenario: Keep view's column when move down
+        Given screen of size (43, 25)
+        And an editor
+        When open file "lipsum.txt"
+        And set view cursor (0, 60)
+        And input "j"
+        And refresh editor
+        Then view cursor position is (1, 60)
+        And screen cursor position is (5, 10)
