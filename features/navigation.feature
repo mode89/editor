@@ -32,3 +32,11 @@ Feature: Navigation
         And refresh editor
         Then view cursor position is (5, 5)
         And screen cursor position is (5, 5)
+
+    Scenario: Move cursor right
+        Given an editor
+        When open file "lipsum.txt"
+        And input "l" 10 times
+        And refresh editor
+        Then view cursor position is (0, 10)
+        And screen cursor position is (0, 10)
