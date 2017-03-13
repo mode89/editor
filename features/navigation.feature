@@ -69,6 +69,16 @@ Feature: Navigation
         Then view cursor position is (3, 0)
         And screen cursor position is (9, 0)
 
+    Scenario: Stop at the first line when move up
+        Given screen of size (43, 25)
+        And an editor
+        When open file "lipsum.txt"
+        And set view cursor (5, 55)
+        And input "k" 100 times
+        And refresh editor
+        Then view cursor position is (0, 55)
+        And screen cursor position is (2, 5)
+
     Scenario: Keep view's column when move down
         Given screen of size (43, 25)
         And an editor
