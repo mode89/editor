@@ -88,3 +88,12 @@ Feature: Navigation
         And refresh editor
         Then view cursor position is (1, 60)
         And screen cursor position is (5, 10)
+
+    Scenario: Bound screen cursor position by the lenght of line
+        Given screen of size (43, 25)
+        And an editor
+        When open file "lipsum.txt"
+        And set view cursor (2, 100)
+        And refresh editor
+        Then view cursor position is (2, 100)
+        And screen cursor position is (8, 20)
