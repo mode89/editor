@@ -73,24 +73,6 @@ Feature: Core functionality
         And refresh editor
         Then screen is identical to file "open_hello.screen"
 
-    Scenario: Navigate in normal mode
-        Given an editor
-        When open file "short_lipsum.txt"
-        And refresh editor
-        Then screen cursor position is (0, 0)
-        When input "j" 5 times
-        And refresh editor
-        Then screen cursor position is (5, 0)
-        When input "k" 1 times
-        And refresh editor
-        Then screen cursor position is (4, 0)
-        When input "l" 3 times
-        And refresh editor
-        Then screen cursor position is (4, 3)
-        When input "h" 2 times
-        And refresh editor
-        Then screen cursor position is (4, 1)
-
     Scenario: Display long file
         Given an editor
         When open file "lipsum.txt"
