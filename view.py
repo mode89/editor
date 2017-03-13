@@ -1,3 +1,4 @@
+import buffer
 from copy import deepcopy
 from cursor import Cursor
 import itertools
@@ -5,7 +6,7 @@ import itertools
 class View:
 
     def __init__(self):
-        self.buffer = None
+        self.buffer = buffer.Buffer()
         self.start = 0
         self.cursor = Cursor(0, 0)
 
