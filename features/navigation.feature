@@ -120,3 +120,8 @@ Feature: Navigation
         Given an editor
         When input CTRL-D
         Then moved down by half screen
+
+    Scenario: Move up by half screen
+        Given an editor
+        When input CTRL-U
+        Then moved up by half screen
