@@ -115,3 +115,8 @@ Feature: Navigation
         When input "h"
         And refresh editor
         Then view cursor position is (0, 3)
+
+    Scenario: Move down by half screen
+        Given an editor
+        When input CTRL-D
+        Then moved down by half screen
