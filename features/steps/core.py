@@ -134,3 +134,11 @@ def step_impl(context, text, code):
 @when("execute \"{command}\"")
 def step_impl(context, command):
     context.editor.execute(command)
+
+@given("buffer is \"{text}\"")
+def step_impl(context, text):
+    text = bytes(text, "utf-8").decode("unicode_escape")
+    lines = text.split('\n')
+    for i in range(len(lines)):
+        lines[i] += '\n'
+    context.editor.view.buffer.lines = lines

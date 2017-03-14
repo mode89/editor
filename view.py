@@ -1,6 +1,11 @@
 import buffer
 import itertools
 
+def get_line_rows(line, screen):
+    length = len(line) - 1 # don't count line break
+    rows = int((length + screen.cols - 1) / screen.cols)
+    return rows
+
 class View:
 
     class Cursor:
@@ -64,9 +69,7 @@ class View:
 
         screen_row = 0
         for line in lines:
-            length = len(line) - 1 # don't count line break
-            rows = int(length / screen.cols) + 1
-            screen_row += rows
+            screen_row += get_line_rows(line, screen)
 
         cur_line = self.buffer.lines[self.cursor.line]
         cur_length = len(cur_line) - 1 # don't count line break

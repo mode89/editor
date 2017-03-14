@@ -97,3 +97,11 @@ Feature: Navigation
         And refresh editor
         Then view cursor position is (2, 100)
         And screen cursor position is (8, 20)
+
+    Scenario: When lenght of line is equal to width of screen
+        Given screen of size (10, 5)
+        And an editor
+        And buffer is "aaaaa\nbbbb\n"
+        When set view cursor (1, 0)
+        And refresh editor
+        Then screen cursor position is (1, 0)
