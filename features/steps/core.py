@@ -114,7 +114,7 @@ def step_impl(context, line, col):
     assert context.editor.view.cursor.line == line
     assert context.editor.view.cursor.col == col
 
-@when("set view cursor ({line:d}, {col:d})")
+@given("set view cursor ({line:d}, {col:d})")
 def step_impl(context, line, col):
     context.editor.view.cursor.line = line
     context.editor.view.cursor.col = col

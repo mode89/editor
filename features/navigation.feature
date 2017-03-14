@@ -2,114 +2,108 @@ Feature: Navigation
 
     Scenario: Move cursor to the beginning when open file
         Given an editor
-        When open file "lipsum.txt"
+        When open file "hello.txt"
         And refresh editor
         Then view cursor position is (0, 0)
-        And screen cursor position is (0, 0)
 
     Scenario: Move cursor down
         Given an editor
-        When open file "lipsum.txt"
-        And input "j" 5 times
+        And buffer is "aaaaa\nbbbbb\nccccc\nddddd\n"
+        When input "j" 3 times
         And refresh editor
-        Then view cursor position is (5, 0)
-        And screen cursor position is (5, 0)
+        Then view cursor position is (3, 0)
+        And screen cursor position is (3, 0)
 
     Scenario: Move cursor up
         Given an editor
-        When open file "lipsum.txt"
-        And set view cursor (5, 0)
-        And input "k" 3 times
+        And buffer is "aaaaa\nbbbbb\nccccc\nddddd\n"
+        And set view cursor (3, 0)
+        When input "k" 2 times
         And refresh editor
-        Then view cursor position is (2, 0)
-        And screen cursor position is (2, 0)
+        Then view cursor position is (1, 0)
+        And screen cursor position is (1, 0)
 
     Scenario: Move cursor left
         Given an editor
-        When open file "lipsum.txt"
-        And set view cursor (5, 10)
-        And input "h" 5 times
+        And buffer is "aaaaa\nbbbbbbbbbbbbbbb\n"
+        And set view cursor (1, 10)
+        When input "h" 5 times
         And refresh editor
-        Then view cursor position is (5, 5)
-        And screen cursor position is (5, 5)
+        Then view cursor position is (1, 5)
+        And screen cursor position is (1, 5)
 
     Scenario: Move cursor right
         Given an editor
-        When open file "lipsum.txt"
-        And input "l" 10 times
+        And buffer is "aaaaa\nbbbbbbbbbbbbbbb\n"
+        And set view cursor (1, 3)
+        When input "l" 7 times
         And refresh editor
-        Then view cursor position is (0, 10)
-        And screen cursor position is (0, 10)
+        Then view cursor position is (1, 10)
+        And screen cursor position is (1, 10)
 
     Scenario: Move cursor right in a long line
-        Given screen of size (43, 25)
+        Given screen of size (10, 5)
         And an editor
-        When open file "lipsum.txt"
-        And input "l" 28 times
+        And buffer is "aaaaaaaaaaaaaa\n"
+        When input "l" 12 times
         And refresh editor
-        Then view cursor position is (0, 28)
-        And screen cursor position is (1, 3)
+        Then view cursor position is (0, 12)
+        And screen cursor position is (2, 2)
 
     Scenario: Stop at the end of line when move right
-        Given screen of size (43, 25)
-        And an editor
-        When open file "lipsum.txt"
-        And input "l" 80 times
+        Given an editor
+        And buffer is "aaaaaaaaaa\n"
+        When input "l" 20 times
         And refresh editor
-        Then view cursor position is (0, 67)
-        And screen cursor position is (2, 17)
+        Then view cursor position is (0, 9)
+        And screen cursor position is (0, 9)
 
     Scenario: Stop at the beginning of line when move left
-        Given screen of size (43, 25)
-        And an editor
-        When open file "lipsum.txt"
-        And set view cursor (3, 60)
-        And input "h" 100 times
+        Given an editor
+        And buffer is "aaaaa\nbbbbbbbbbb\n"
+        And set view cursor (1, 7)
+        When input "h" 30 times
         And refresh editor
-        Then view cursor position is (3, 0)
-        And screen cursor position is (9, 0)
+        Then view cursor position is (1, 0)
+        And screen cursor position is (1, 0)
 
     Scenario: Stop at the first line when move up
-        Given screen of size (43, 25)
-        And an editor
-        When open file "lipsum.txt"
-        And set view cursor (5, 55)
-        And input "k" 100 times
+        Given an editor
+        And buffer is "aaaaa\nbbbbb\nccccc\nddddd\n"
+        And set view cursor (3, 3)
+        When input "k" 10 times
         And refresh editor
-        Then view cursor position is (0, 55)
-        And screen cursor position is (2, 5)
+        Then view cursor position is (0, 3)
+        And screen cursor position is (0, 3)
 
     Scenario: Keep view's column when move down
-        Given screen of size (43, 25)
-        And an editor
-        When open file "lipsum.txt"
-        And set view cursor (0, 60)
-        And input "j"
+        Given an editor
+        And buffer is "aaaaa\nbbbbbbbbbb\nccccccc\nddd\n"
+        And set view cursor (1, 8)
+        When input "j" 2 times
         And refresh editor
-        Then view cursor position is (1, 60)
-        And screen cursor position is (5, 10)
+        Then view cursor position is (3, 8)
 
     Scenario: Bound screen cursor position by the lenght of line
-        Given screen of size (43, 25)
-        And an editor
-        When open file "lipsum.txt"
-        And set view cursor (2, 100)
+        Given an editor
+        And buffer is "aaaaa\nbbbbbbbbbb\nccccccc\nddd\n"
+        And set view cursor (1, 8)
+        When input "j" 2 times
         And refresh editor
-        Then view cursor position is (2, 100)
-        And screen cursor position is (8, 20)
+        Then screen cursor position is (3, 2)
 
     Scenario: When lenght of line is equal to width of screen
         Given screen of size (10, 5)
         And an editor
         And buffer is "aaaaa\nbbbb\n"
-        When set view cursor (1, 0)
-        And refresh editor
+        And set view cursor (1, 0)
+        When refresh editor
         Then screen cursor position is (1, 0)
 
     Scenario: When line is empty
         Given screen of size (10, 5)
         And an editor
         And buffer is "\naaa\n"
-        When set view cursor (1, 0)
-        And refresh editor
+        And set view cursor (1, 0)
+        When refresh editor
         Then screen cursor position is (1, 0)
