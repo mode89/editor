@@ -105,3 +105,11 @@ Feature: Navigation
         When set view cursor (1, 0)
         And refresh editor
         Then screen cursor position is (1, 0)
+
+    Scenario: When line is empty
+        Given screen of size (10, 5)
+        And an editor
+        And buffer is "\naaa\n"
+        When set view cursor (1, 0)
+        And refresh editor
+        Then screen cursor position is (1, 0)

@@ -3,7 +3,10 @@ import itertools
 
 def get_line_rows(line, screen):
     length = len(line) - 1 # don't count line break
-    rows = int((length + screen.cols - 1) / screen.cols)
+    if length == 0:
+        rows = 1
+    else:
+        rows = int((length + screen.cols - 1) / screen.cols)
     return rows
 
 class View:
