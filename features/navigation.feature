@@ -116,6 +116,13 @@ Feature: Navigation
         And refresh editor
         Then view cursor position is (0, 3)
 
+    Scenario: Move down and scroll
+        Given an editor
+        And cursor is at the bottom of screen
+        When input "j"
+        And refresh editor
+        Then scroll text down
+
     Scenario: Move down by half screen
         Given an editor
         When input CTRL-D
