@@ -123,6 +123,13 @@ Feature: Navigation
         And refresh editor
         Then scroll text down
 
+    Scenario: Move up and scroll
+        Given an editor
+        And cursor is at the top of screen
+        When input "k"
+        And refresh editor
+        Then scroll text up
+
     Scenario: Move down by half screen
         Given an editor
         When input CTRL-D
