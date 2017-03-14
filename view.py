@@ -1,8 +1,11 @@
 import buffer
 import itertools
 
+def get_line_length(line):
+    return len(line) - 1 # don't count line break
+
 def get_line_rows(line, screen):
-    length = len(line) - 1 # don't count line break
+    length = get_line_length(line)
     if length == 0:
         rows = 1
     else:
@@ -32,11 +35,19 @@ class View:
     def move_right(self):
         line = self.buffer.lines[self.cursor.line]
         self.cursor.col = \
-            max(min(self.cursor.col + 1, len(line) - 2), 0)
+            max(min(self.cursor.col + 1, get_line_length(line) - 1), 0)
 
     def move_left(self):
+        # constrain by line ending
         line = self.buffer.lines[self.cursor.line]
-        self.cursor.col = min(max(self.cursor.col - 1, 0), len(line) - 1)
+        length = get_line_length(line)
+        if self.cursor.col >= length:
+            self.cursor.col = length - 1
+
+        self.cursor.col -= 1
+
+        # constrain by line beginning
+        if self.cursor.col < 0: self.cursor.col = 0
 
     def flush(self, screen):
 
@@ -49,7 +60,7 @@ class View:
         row = 0
         for line in lines:
 
-            line_len = len(line) - 1 # don't count line break
+            line_len = get_line_length(line)
             line_rows = int(line_len / screen.cols) + 1
 
             for i in range(line_rows):
@@ -75,7 +86,7 @@ class View:
             screen_row += get_line_rows(line, screen)
 
         cur_line = self.buffer.lines[self.cursor.line]
-        cur_length = len(cur_line) - 1 # don't count line break
+        cur_length = get_line_length(cur_line)
 
         clamped_col = min(cur_length - 1, self.cursor.col) # clamp from right
         clamped_col = max(0, clamped_col) # clamp from left

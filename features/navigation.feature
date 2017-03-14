@@ -107,3 +107,11 @@ Feature: Navigation
         And set view cursor (1, 0)
         When refresh editor
         Then screen cursor position is (1, 0)
+
+    Scenario: Constrain view cursor by line lenght when move left
+        Given an editor
+        And buffer is "aaaaa\n"
+        And set view cursor (0, 10)
+        When input "h"
+        And refresh editor
+        Then view cursor position is (0, 3)
