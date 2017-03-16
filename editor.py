@@ -8,7 +8,7 @@ import normal_mode
 class Editor:
 
     def __init__(self):
-        self.view = View()
+        self.view = View(self)
         self.buffers = dict()
         self.input_buffer = InputBuffer()
         self.exiting = False
@@ -32,13 +32,13 @@ class Editor:
             if key == 3:
                 self.exiting = True
             self.mode.handle(self, key)
-        self.view.update_cursor(self.screen)
+        self.view.update_cursor()
 
     def open(self, file_name):
         new_buffer = Buffer(file_name)
         self.buffers[file_name] = new_buffer
         self.view.buffer = new_buffer
-        self.view.flush(self.screen)
+        self.view.flush()
 
     def enter_command_mode(self):
         self.set_mode(self.modes[command_mode.CommandMode])

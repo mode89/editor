@@ -1,5 +1,6 @@
 import buffer
 import itertools
+import weakref
 
 def get_line_length(line):
     return len(line) - 1 # don't count line break
@@ -20,7 +21,8 @@ class View:
             self.line = 0
             self.col = 0
 
-    def __init__(self):
+    def __init__(self, editor):
+        self.editor = weakref.ref(editor)
         self.buffer = buffer.Buffer()
         self.top_line = 0
         self.cursor = View.Cursor()
@@ -49,8 +51,9 @@ class View:
         # constrain by line beginning
         if self.cursor.col < 0: self.cursor.col = 0
 
-    def flush(self, screen):
+    def flush(self):
 
+        screen = self.editor().screen
         lines = itertools.islice(
             self.buffer.lines,
             self.top_line,
@@ -72,10 +75,11 @@ class View:
 
             if row >= screen.rows: break # reach bottom of screen
 
-        self.update_cursor(screen)
+        self.update_cursor()
 
-    def update_cursor(self, screen):
+    def update_cursor(self):
 
+        screen = self.editor().screen
         lines = itertools.islice(
             self.buffer.lines,
             self.top_line,
