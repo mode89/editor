@@ -1,7 +1,11 @@
 import input_buffer
 import normal_mode
+import weakref
 
 class CommandMode:
+
+    def __init__(self, editor):
+        self.editor = weakref.ref(editor)
 
     def enter(self, editor):
 
@@ -11,11 +15,6 @@ class CommandMode:
         editor.screen.write(":", (last_row, 0))
 
     def handle(self, editor, key):
-
-        screen = editor.screen
-        last_row = screen.rows - 1
-        begin = (last_row, 1)
-
         # update command line buffer
         if key >= 32 and key <= 126:
             self.buffer += chr(key)
@@ -29,6 +28,11 @@ class CommandMode:
             exec(self.buffer)
             editor.set_mode(editor.modes[normal_mode.NormalMode])
             return
+
+    def flush(self):
+        screen = self.editor().screen
+        last_row = screen.rows - 1
+        begin = (last_row, 1)
 
         # clear command line and write command buffer
         clear = " " * (screen.cols - 1)

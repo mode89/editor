@@ -16,7 +16,8 @@ class Editor:
         self.modes = dict()
         self.modes[normal_mode.NormalMode] = \
             normal_mode.NormalMode(self)
-        self.modes[command_mode.CommandMode] = command_mode.CommandMode()
+        self.modes[command_mode.CommandMode] = \
+            command_mode.CommandMode(self)
         self.set_mode(self.modes[normal_mode.NormalMode])
 
     def set_mode(self, mode):
