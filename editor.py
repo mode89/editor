@@ -14,7 +14,8 @@ class Editor:
         self.exiting = False
 
         self.modes = dict()
-        self.modes[normal_mode.NormalMode] = normal_mode.NormalMode()
+        self.modes[normal_mode.NormalMode] = \
+            normal_mode.NormalMode(self)
         self.modes[command_mode.CommandMode] = command_mode.CommandMode()
         self.set_mode(self.modes[normal_mode.NormalMode])
 
