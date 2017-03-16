@@ -32,7 +32,7 @@ class Editor:
             if key == 3:
                 self.exiting = True
             self.mode.handle(self, key)
-        self.view.flush()
+        self.mode.flush()
 
     def open(self, file_name):
         new_buffer = Buffer(file_name)
