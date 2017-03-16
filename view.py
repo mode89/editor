@@ -4,7 +4,7 @@ import itertools
 def get_line_length(line):
     return len(line) - 1 # don't count line break
 
-def get_line_rows(line, screen):
+def get_line_height(line, screen):
     length = get_line_length(line)
     if length == 0:
         rows = 1
@@ -83,7 +83,7 @@ class View:
 
         screen_row = 0
         for line in lines:
-            screen_row += get_line_rows(line, screen)
+            screen_row += get_line_height(line, screen)
 
         cur_line = self.buffer.lines[self.cursor.line]
         cur_length = get_line_length(cur_line)
