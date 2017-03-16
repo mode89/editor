@@ -147,6 +147,10 @@ def step_impl(context, text):
 def create_screen(context):
     context.screen = Screen(25, 80)
 
+@when("clear screen")
+def step_impl(context):
+    context.screen.clear()
+
 @when("write \"{text}\" to screen")
 def write_to_screen(context, text):
     context.screen.write(text)

@@ -5,8 +5,13 @@ class Screen:
     def __init__(self, rows, cols):
         self.rows = rows
         self.cols = cols
-        self.buffer = [[ord(' ') for x in range(cols)] for y in range(rows)]
         self.cursor = Cursor(0, 0)
+        self.clear()
+
+    def clear(self):
+        self.buffer = \
+            [[ord(' ') for x in range(self.cols)]
+                for y in range(self.rows)]
 
     def write(self, text, coord=None):
 
