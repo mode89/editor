@@ -166,3 +166,8 @@ def screen_compare(context, filename):
             for char in row:
                 assert f.read(1) == chr(char).encode()
             assert f.read(1) == '\n'.encode()
+
+@then("screen text at ({row:d}, {col:d}) is \"{text}\"")
+def step_impl(context, row, col, text):
+    for i in range(len(text)):
+        assert context.screen[row, col+i] == ord(text[i])
