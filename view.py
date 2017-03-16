@@ -22,7 +22,7 @@ class View:
 
     def __init__(self):
         self.buffer = buffer.Buffer()
-        self.start = 0
+        self.top_line = 0
         self.cursor = View.Cursor()
 
     def move_down(self):
@@ -53,7 +53,7 @@ class View:
 
         lines = itertools.islice(
             self.buffer.lines,
-            self.start,
+            self.top_line,
             len(self.buffer.lines))
 
         # write lines starting from the begining of the screen
@@ -78,7 +78,7 @@ class View:
 
         lines = itertools.islice(
             self.buffer.lines,
-            self.start,
+            self.top_line,
             self.cursor.line)
 
         screen_row = 0
