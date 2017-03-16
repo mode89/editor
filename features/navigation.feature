@@ -117,11 +117,13 @@ Feature: Navigation
         Then view cursor position is (0, 3)
 
     Scenario: Move down and scroll
-        Given an editor
-        And cursor is at the bottom of screen
+        Given screen of size (25, 80)
+        And an editor
+        And open file "lipsum.txt"
+        And set view cursor (24, 0)
         When input "j"
         And refresh editor
-        Then scroll text down
+        Then screen is identical to file "scroll_down.screen"
 
     Scenario: Move up and scroll
         Given an editor

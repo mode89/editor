@@ -30,6 +30,7 @@ class View:
     def move_down(self):
         self.cursor.line = \
             min(self.cursor.line + 1, len(self.buffer.lines) - 1)
+        self.update_top_line()
 
     def move_up(self):
         self.cursor.line = max(self.cursor.line - 1, 0)
@@ -54,6 +55,8 @@ class View:
     def flush(self):
 
         screen = self.editor().screen
+        screen.clear()
+
         lines = itertools.islice(
             self.buffer.lines,
             self.top_line,
@@ -100,3 +103,47 @@ class View:
 
         screen.cursor.row = screen_row
         screen.cursor.col = screen_col
+
+    def update_top_line(self):
+        if self.is_cursor_below_screen():
+            self.fit_bottom_line_to_cursor()
+
+    def fit_bottom_line_to_cursor(self):
+        screen = self.editor().screen
+        start = self.top_line
+        stop = self.cursor.line + 1
+        lines = reversed(self.buffer.lines[start:stop])
+
+        count_rows = 0
+        count_lines = 0
+        for line in lines:
+            count_rows += get_line_height(line, screen)
+            count_lines += 1
+            if count_rows >= screen.rows:
+                break
+
+        self.top_line = self.cursor.line + 1 - count_lines
+
+    def is_cursor_below_screen(self):
+        return self.cursor.line > self.get_bottom_line_num()
+
+    def get_bottom_line_num(self):
+        return self.top_line + self.get_screen_lines_count() - 1
+
+    def get_screen_lines_count(self):
+
+        screen = self.editor().screen
+        lines = itertools.islice(
+            self.buffer.lines,
+            self.top_line,
+            len(self.buffer.lines))
+
+        count_rows = 0
+        count_lines = 0
+        for line in lines:
+            count_rows += get_line_height(line, screen)
+            count_lines += 1
+            if count_rows >= screen.rows:
+                break
+
+        return count_lines

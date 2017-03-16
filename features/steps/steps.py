@@ -19,6 +19,10 @@ def instance_of_editor(context):
 def step_impl(context):
     context.editor.set_mode(context.editor.modes[command_mode.CommandMode])
 
+@given("open file \"{file_name}\"")
+def step_impl(context, file_name):
+    context.editor.open(file_name)
+
 @when("open file \"{file_name}\"")
 def open_file(context, file_name):
     context.editor.open(file_name)
