@@ -117,10 +117,12 @@ class View:
         count_rows = 0
         count_lines = 0
         for line in lines:
-            count_rows += get_line_height(line, screen)
-            count_lines += 1
-            if count_rows >= screen.rows:
+            line_height = get_line_height(line, screen)
+            if (count_rows + line_height) > screen.rows:
                 break
+            else:
+                count_rows += line_height
+                count_lines += 1
 
         self.top_line = self.cursor.line + 1 - count_lines
 

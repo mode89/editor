@@ -125,6 +125,16 @@ Feature: Navigation
         And refresh editor
         Then screen is identical to file "scroll_down.screen"
 
+    Scenario: Scroll down wide text
+        Given screen of size (3, 5)
+        And an editor
+        And buffer is "aaaaaaa\nbbbb\nccccc\nddd"
+        And set view cursor (1, 0)
+        When input "j"
+        And refresh editor
+        Then view cursor position is (2, 0)
+        Then screen cursor position is (1, 0)
+
     Scenario: Move up and scroll
         Given an editor
         And cursor is at the top of screen
